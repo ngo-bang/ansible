@@ -1,18 +1,15 @@
 ---
-- name: Build database image
+- name: Pull database image
   community.docker.docker_image:
-    name: database
-    build:
-      path: ./roles/database/files
-      dockerfile: Dockerfile
-    source: build
+    name: ngocongbang/database
+    source: pull
     force_source: true
 
 
 - name: Create database container
   community.docker.docker_container:
     name: database
-    image: database
+    image: ngocongbang/database
     restart_policy: "unless-stopped"
     networks:
       - name: "{{ NETWORK_NAME }}"

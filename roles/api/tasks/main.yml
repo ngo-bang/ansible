@@ -1,17 +1,14 @@
 ---
-- name: Build api image
+- name: Pull api image
   community.docker.docker_image:
-    name: api
-    build:
-      path: ./roles/api/files
-      dockerfile: Dockerfile
-    source: build
+    name: ngocongbang/api
+    source: pull
     force_source: true
 
 - name: Create api container
   community.docker.docker_container:
     name: api
-    image: api
+    image: ngocongbang/api
     restart_policy: "unless-stopped"
     env:
       MONGO_HOST: "{{ MONGO_HOST }}"

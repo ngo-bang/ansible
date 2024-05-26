@@ -1,17 +1,14 @@
 ---
-- name: Build web image
+- name: Pull web image
   community.docker.docker_image:
-    name: web
-    build:
-      path: ./roles/web/files
-      dockerfile: Dockerfile
-    source: build
+    name: ngocongbang/web
+    source: pull
     force_source: true
 
 - name: Create web container
   community.docker.docker_container:
     name: web
-    image: web
+    image: ngocongbang/web
     restart_policy: "unless-stopped"
     ports:
       - "81:81"
