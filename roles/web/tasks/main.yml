@@ -1,0 +1,21 @@
+---
+- name: Build web image
+  community.docker.docker_image:
+    name: web
+    build:
+      path: ./roles/web/files
+      dockerfile: Dockerfile
+    source: build
+    force_source: true
+  args:
+    chdir: "{{ playbook_dir }}"
+
+- name: Create web container
+  community.docker.docker_container:
+    name: web
+    image: web
+    restart_policy: "unless-stopped"
+    ports:
+      - "81:81"
+    networks:
+      - name: "{{ NETWORK_NAME }}"

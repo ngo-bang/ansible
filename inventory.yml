@@ -1,0 +1,24 @@
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+      ansible_python_interpreter: /usr/bin/python3
+      ansible_become_user: root
+
+    host1:
+      ansible_host: 192.168.86.130
+      ansible_connection: ssh
+      ansible_user: bang
+      ansible_ssh_pass: bang
+      ansible_become: yes 
+      ansible_become_method: sudo
+      ansible_become_pass: bang
+
+    host2:
+      ansible_host: 192.168.86.129
+      ansible_connection: ssh
+      ansible_user: test
+      ansible_ssh_pass: test
+      ansible_become: yes 
+      ansible_become_method: sudo
+      ansible_become_pass: test

@@ -1,0 +1,24 @@
+---
+- name: Build api image
+  community.docker.docker_image:
+    name: api
+    build:
+      path: ../roles/api/files
+      dockerfile: Dockerfile
+    source: build
+    force_source: true
+  args:
+    chdir: "{{ playbook_dir }}"
+
+- name: Create api container
+  community.docker.docker_container:
+    name: api
+    image: api
+    restart_policy: "unless-stopped"
+    env:
+      MONGO_HOST: "{{ MONGO_HOST }}"
+      MONGO_PORT: "{{ MONGO_PORT }}"
+    ports:
+      - "9999:9999"
+    networks:
+      - name: "{{ NETWORK_NAME }}"

@@ -1,0 +1,22 @@
+---
+- name: Build database image
+  community.docker.docker_image:
+    name: database
+    build:
+      path: "{{playbook_dir }}" /roles/database/files
+      dockerfile: Dockerfile
+    source: "build"
+    force_source: true
+  args:
+    chdir: "{{ playbook_dir }}"
+
+- name: Create database container
+  community.docker.docker_container:
+    name: database
+    image: database
+    restart_policy: "unless-stopped"
+    networks:
+      - name: "{{ NETWORK_NAME }}"
+        ipv4_address: "{{ MONGO_HOST }}"
+    ports:
+      - "27017:27017"
