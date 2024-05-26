@@ -32,16 +32,10 @@
     name: ['docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-buildx-plugin', 'docker-compose-plugin']
     state: present
 
-# - name: Check if docker network exists
-#   docker_network_info:
-#     name: "{{ NETWORK_NAME }}"
-#   register: docker_network
-
 - name: Create docker network
   docker_network:
     name: "{{ NETWORK_NAME }}"
-    state: present
     ipam_config:
       - subnet: "{{ NETWORK_SUBNET }}"
     state: present
-  # when: docker_network.exists == False
+ 
