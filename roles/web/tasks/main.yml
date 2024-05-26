@@ -7,8 +7,6 @@
       dockerfile: Dockerfile
     source: build
     force_source: true
-  args:
-    chdir: "{{ playbook_dir }}"
 
 - name: Create web container
   community.docker.docker_container:

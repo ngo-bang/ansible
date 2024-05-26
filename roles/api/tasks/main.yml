@@ -3,12 +3,10 @@
   community.docker.docker_image:
     name: api
     build:
-      path: ../roles/api/files
+      path: ./roles/api/files
       dockerfile: Dockerfile
     source: build
     force_source: true
-  args:
-    chdir: "{{ playbook_dir }}"
 
 - name: Create api container
   community.docker.docker_container:

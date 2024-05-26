@@ -3,12 +3,11 @@
   community.docker.docker_image:
     name: database
     build:
-      path: "{{playbook_dir }}" /roles/database/files
+      path: ./roles/database/files
       dockerfile: Dockerfile
-    source: "build"
+    source: build
     force_source: true
-  args:
-    chdir: "{{ playbook_dir }}"
+
 
 - name: Create database container
   community.docker.docker_container:
